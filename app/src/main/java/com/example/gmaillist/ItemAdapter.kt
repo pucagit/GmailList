@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 
@@ -27,7 +28,8 @@ class ItemAdapter(private val items: List<ItemModel>): BaseAdapter() {
                 itemView.findViewById(R.id.itemImage),
                 itemView.findViewById(R.id.itemTitle),
                 itemView.findViewById(R.id.itemContent),
-                itemView.findViewById(R.id.itemTime)
+                itemView.findViewById(R.id.itemTime),
+                itemView.findViewById(R.id.checkbox)
             )
             itemView.tag = viewHolder // Store the view holder in the tag
         } else {
@@ -43,6 +45,13 @@ class ItemAdapter(private val items: List<ItemModel>): BaseAdapter() {
         viewHolder.titleTextView.text = currentItem.title
         viewHolder.contentTextView.text = currentItem.content
         viewHolder.timeTextView.text = currentItem.time
+        viewHolder.checkBox.setOnClickListener{
+            if(viewHolder.checkBox.isChecked) {
+                viewHolder.checkBox.setBackgroundResource(R.drawable.baseline_star_24)
+            } else {
+                viewHolder.checkBox.setBackgroundResource(R.drawable.star_outline)
+            }
+        }
 
         return itemView
     }
@@ -52,6 +61,7 @@ class ItemAdapter(private val items: List<ItemModel>): BaseAdapter() {
         val imageView: ImageView,
         val titleTextView: TextView,
         val contentTextView: TextView,
-        val timeTextView: TextView
+        val timeTextView: TextView,
+        val checkBox: CheckBox
     )
 }
